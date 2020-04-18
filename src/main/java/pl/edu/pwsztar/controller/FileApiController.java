@@ -28,10 +28,12 @@ public class FileApiController {
     public FileApiController(FileService fileService){
         this.fileService = fileService;
     }
+
     @CrossOrigin
     @GetMapping(value = "/download-txt")
     public ResponseEntity<Resource> downloadTxt() {
         LOGGER.info("--- download txt file ---");
+
         try{
         return ResponseEntity.ok()
                 .header(HttpHeaders.CONTENT_DISPOSITION, "attachment;filename=" + "movies_"+(new Date().getTime())+".txt")
@@ -45,6 +47,7 @@ public class FileApiController {
     @GetMapping(value = "/download-csv")
     public  ResponseEntity<Resource> downloadCsv(){
         LOGGER.info("--- download csv file ---");
+
         try{
             return ResponseEntity.ok()
                     .header(HttpHeaders.CONTENT_DISPOSITION,"attachment;filename=" + "movies_"+(new Date().getTime())+".csv")
