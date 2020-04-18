@@ -1,5 +1,6 @@
 package pl.edu.pwsztar.domain.entity;
 
+
 import javax.persistence.*;
 import java.io.Serializable;
 
@@ -21,38 +22,66 @@ public class Movie implements Serializable {
     @Column(name = "year")
     private Integer year;
 
-    public Movie() {
+    public Movie(){
+    }
+
+    private Movie(Builder builder) {
+        movieId = builder.movieId;
+        title = builder.title;
+        image = builder.image;
+        year = builder.year;
     }
 
     public Long getMovieId() {
         return movieId;
     }
 
-    public void setMovieId(Long movieId) {
-        this.movieId = movieId;
-    }
 
     public String getTitle() {
         return title;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
 
     public String getImage() {
         return image;
     }
 
-    public void setImage(String image) {
-        this.image = image;
-    }
 
     public Integer getYear() {
         return year;
     }
 
-    public void setYear(Integer year) {
-        this.year = year;
+    public static final class Builder{
+        private Long movieId;
+        private String title;
+        private String image;
+        private Integer year;
+
+        public Builder(){
+        }
+
+        public Builder movieId(Long movieId){
+            this.movieId = movieId;
+            return this;
+        }
+
+        public Builder title(String title){
+            this.title = title;
+            return this;
+        }
+
+        public Builder image(String image){
+            this.image = image;
+            return this;
+        }
+
+        public Builder year(Integer year){
+            this.year = year;
+            return this;
+        }
+
+        public Movie build(){
+            return new Movie(this);
+        }
     }
 }
